@@ -24,7 +24,8 @@ class GoogleAnalytics extends AbstractTracker
 
     const TRACKER_URL_MANY = 'https://www.google-analytics.com/batch';
 
-    const DEFAULT_PARAMS = array(
+    //const DEFAULT_PARAMS = array(
+    private $DEFAULT_PARAMS = array(
         'v'   => 1,             // API Version
         'tid' => null,          // Tracking/Property (required) ID e.g. UA-XX-XX
         'cid' => null,          // Anonymous Client ID UUIDv4
@@ -57,7 +58,7 @@ class GoogleAnalytics extends AbstractTracker
             $emitter ? $emitter : new Emitter\Async(),
             $formatter ? $formatter : new LogFormatter\QueryString()
         );
-        $this->emitter->setParams(self::DEFAULT_PARAMS);
+        $this->emitter->setParams($this->DEFAULT_PARAMS);
 
         if (isset($_SERVER['HTTP_USER_AGENT']) && !isset($params['ua'])) {
             $params['ua'] = $_SERVER['HTTP_USER_AGENT'];
