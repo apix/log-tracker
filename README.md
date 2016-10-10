@@ -1,6 +1,6 @@
 # Log-Tracker, the tracking companion to Apix-Log
 
-[![Latest Stable Version](https://poser.pugx.org/apix/log-tracker/v/stable.svg)](https://packagist.org/packages/apix/log-tracker)  [![Build Status](https://travis-ci.org/apix/log-tracker.png?branch=master)](https://travis-ci.org/apix/log-tracker)  [![Code Quality](https://scrutinizer-ci.com/g/apix/log-tracker/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/apix/log-tracker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![License](https://poser.pugx.org/apix/log-tracker/license.svg)](https://packagist.org/packages/apix/log-tracker)
+[![Latest Stable Version](https://poser.pugx.org/apix/log-tracker/v/stable.svg)](https://packagist.org/packages/apix/log-tracker)  [![Build Status](https://travis-ci.org/Apix/log-tracker.png?branch=master)](https://travis-ci.org/Apix/log-tracker)  [![Code Quality](https://scrutinizer-ci.com/g/apix/log-tracker/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/apix/log-tracker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![License](https://poser.pugx.org/apix/log-tracker/license.svg)](https://packagist.org/packages/apix/log-tracker)
 
 An extension for the [Apix-Log](https://github.com/frqnck/apix-log) PSR-3 logger which adds log tracking to:
  * [GoogleAnalytics](src/GoogleAnalytics.php),
