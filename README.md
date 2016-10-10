@@ -48,6 +48,6 @@ $logger->notice('GA Tracking', $dataToTrack);
 
 Note: if required, you can add some additional [Google Analytics Parameters](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters) to the `options` array such as `uip` (user IP), `ua` (user agent), etc... If not provided, these will be guessed from the current context.
 
-## Adavnced usage.
+## Advanced usage.
 
 TODO -- for now just follow [Apix Log Examples](https://github.com/frqnck/apix-log).
