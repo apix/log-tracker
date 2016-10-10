@@ -1,0 +1,32 @@
+{
+  "name": "apix/log-tracker",
+  "description": "Tracking companion to APIx Log",
+  "type": "library",
+  "minimum-stability": "stable",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Franck Cassedanne",
+      "email": "franck@ouarz.net"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "apix/log": "^1.2",
+    "ramsey/uuid": "^3.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.*",
+    "apix/log": "^1.2",
+    "php-mock/php-mock-phpunit": "^1.1"
+  },
+  "autoload": {
+    "psr-4": { "Apix\\Log\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Apix\\Log\\tests\\": "tests/" }
+  },
+  "provide": {
+    "psr/log-implementation": "1.0.0"
+  }
+}
