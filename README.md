@@ -61,7 +61,7 @@ $dashbot_logger = new Dashbot('<API-Key');
 
 $messages_received = ["text" => "Hi, bot", "userId" => "..."];
 $dataToTrack = $dashbot_logger->incoming($messages_received);
-//$dataToTrack = $dashbot_logger->incoming($messages_received, "localTag"); // Override the global tag.
+//$dataToTrack = $dashbot_logger->incoming($messages_received, "localTag"); // Override the global tag
 
 $messages_sent = ["text" => "Hello, user", "userId" => "..."];
 $dataToTrack = $logger->outgoing($messages_sent);
