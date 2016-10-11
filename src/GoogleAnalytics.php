@@ -26,12 +26,12 @@ class GoogleAnalytics extends AbstractTracker
 
     //const DEFAULT_PARAMS = array(
     private $DEFAULT_PARAMS = array(
-        'v'   => 1,             // API Version
+        'v' => 1,             // API Version
         'tid' => null,          // Tracking/Property (required) ID e.g. UA-XX-XX
         'cid' => null,          // Anonymous Client ID UUIDv4
                                 // see http://www.ietf.org/rfc/rfc4122.txt
-        'ds'  => __NAMESPACE__, // Data Source
-        't'   => null,          // Hit type (required)
+        'ds' => __NAMESPACE__, // Data Source
+        't' => null,          // Hit type (required)
     );
 
     /**

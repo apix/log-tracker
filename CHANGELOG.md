@@ -2,9 +2,9 @@
 
 #### Version `1.0.0` (07-Oct-2016)
 - Initial release.
-- Google integration (track pages and events).
+- Google integration.
 
-#### Version `1.0.1` (XX-Oct-2016)
+#### Version `1.1.0` (11-Oct-2016)
 - Dashbot integration.
 
 <pre>

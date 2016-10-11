@@ -30,24 +30,51 @@ use Apix\Log;
 
 $options = [
     'tid' => '<UA-XX-XX>',    // Tracking/Property ID (required). 
-    // 'cid' => '<UUID-v4>',  // Anonymous Client ID UUIDv4 (if not provided, auto-generated one)
-    // ...                    // Any numbers of Google Analytics Parameters (see note). 
+    // 'cid' => '<UUID-v4>',  // Anonymous Client ID UUIDv4 (if not provided, auto-generated one).
+    // ...                    // Any numbers of Google Analytics Parameters (see notes). 
 ];
 
-$logger = new GoogleAnalytics($options);
-$logger->setDeferred(true); // recommneded, batched mode.
+$ga_logger = new GoogleAnalytics($options);
+$ga_logger->setDeferred(true);   // Enable batched mode (recommneded).
 
-$dataToTrack = $logger->getPage('http://foo.tld/...', 'Welcome page');
-//$dataToTrack = $logger->getEvent('category', 'action', 'label', 'value');
-//$dataToTrack = $logger->getSocial('action', 'network', 'target');
-//$dataToTrack = $logger->getException('description');
-//$dataToTrack = $logger->getApp('name', 'version', 'id');
+$dataToTrack = $ga_logger->getPage('http://foo.tld/...', 'Welcome page');
+//$dataToTrack = $ga_logger->getEvent('category', 'action', 'label', 'value');
+//$dataToTrack = $ga_logger->getSocial('action', 'network', 'target');
+//$dataToTrack = $ga_logger->getException('description');
+//$dataToTrack = $ga_logger->getApp('name', 'version', 'id');
 
-$logger->notice('GA Tracking', $dataToTrack);
+$ga_logger->notice('GA Tracking', $dataToTrack);
 ```
 
-Note: if required, you can add some additional [Google Analytics Parameters](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters) to the `options` array such as `uip` (user IP), `ua` (user agent), etc... If not provided, these will be guessed from the current context.
+Notes:
+ * The log level and message are not forwarded to Google Analytics (TBD).
+ * If required, you can add some additional [Google Analytics Parameters](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters) to the `options` array such as `uip` (user IP), `ua` (user agent), etc... If not provided, these will be generated and/or guessed from the current context.
+
+## Basic usage, Dashbot.
+
+```php
+use Apix\Log;
+
+$dashbot_logger = new Dashbot('<API-Key');
+//$dashbot_logger->setPlatform('facebook'); // 'generic' (default), 'slack', 'kik'.
+// $dashbot_logger->setGlobalTag('myTag'); // Useful to combined metrics together.
+
+$messages_received = ["text" => "Hi, bot", "userId" => "..."];
+$dataToTrack = $dashbot_logger->incoming($messages_received);
+// $dataToTrack = $dashbot_logger->incoming($messages_received, "myLocalTag"); // To override the global tag.
+
+$messages_sent = ["text" => "Hello, user", "userId" => "..."];
+$dataToTrack = $logger->outgoing($messages_sent);
+
+$dashbot_logger->info('Dashbot Tracking', $dataToTrack);
+```
+
+Notes:
+ * The log level and message are not forwarded to Dashbot (TBD).
+ * A local tag (which override the main global tag) can be passed to the `incoming` and `outgoing` methods as a second argument.
+
+
 
 ## Advanced usage.
 
-TODO -- for now just follow [Apix Log Examples](https://github.com/frqnck/apix-log).
+Please for now just follow [Apix Log Examples](https://github.com/frqnck/apix-log).

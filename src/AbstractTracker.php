@@ -82,5 +82,4 @@ abstract class AbstractTracker extends Logger\AbstractLogger implements Logger\L
     {
         return $this->uuid;
     }
-
 }
