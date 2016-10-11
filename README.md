@@ -29,13 +29,13 @@ You require at least PHP 5.3.
 use Apix\Log;
 
 $options = [
-    'tid' => '<UA-XX-XX>',    // Tracking/Property ID (required). 
-    // 'cid' => '<UUID-v4>',  // Anonymous Client ID UUIDv4 (if not provided, auto-generated one).
-    // ...                    // Any numbers of Google Analytics Parameters (see notes). 
+    'tid' => '<UA-XX-XX>',   // Tracking/Property ID (required). 
+    //'cid' => '<UUID-v4>',  // Anonymous Client ID UUIDv4 (if not provided, auto-generated one).
+    //...                    // Any numbers of Google Analytics Parameters (see notes). 
 ];
 
 $ga_logger = new GoogleAnalytics($options);
-$ga_logger->setDeferred(true);   // Enable batched mode (recommneded).
+$ga_logger->setDeferred(true); // Enable batched mode (recommneded).
 
 $dataToTrack = $ga_logger->getPage('http://foo.tld/...', 'Welcome page');
 //$dataToTrack = $ga_logger->getEvent('category', 'action', 'label', 'value');
@@ -57,11 +57,11 @@ use Apix\Log;
 
 $dashbot_logger = new Dashbot('<API-Key');
 //$dashbot_logger->setPlatform('facebook'); // 'generic' (default), 'slack', 'kik'.
-// $dashbot_logger->setGlobalTag('myTag'); // Useful to combined metrics together.
+//$dashbot_logger->setGlobalTag('myTag');   // Useful to combined metrics.
 
 $messages_received = ["text" => "Hi, bot", "userId" => "..."];
 $dataToTrack = $dashbot_logger->incoming($messages_received);
-// $dataToTrack = $dashbot_logger->incoming($messages_received, "myLocalTag"); // To override the global tag.
+//$dataToTrack = $dashbot_logger->incoming($messages_received, "localTag"); // Override the global tag.
 
 $messages_sent = ["text" => "Hello, user", "userId" => "..."];
 $dataToTrack = $logger->outgoing($messages_sent);
@@ -72,8 +72,6 @@ $dashbot_logger->info('Dashbot Tracking', $dataToTrack);
 Notes:
  * The log level and message are not forwarded to Dashbot (TBD).
  * A local tag (which override the main global tag) can be passed to the `incoming` and `outgoing` methods as a second argument.
-
-
 
 ## Advanced usage.
 
