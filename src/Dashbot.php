@@ -18,7 +18,8 @@ class Dashbot extends AbstractTracker
     const TRANSPORTER_CMD =
         'curl -X POST -d %1$s \'%2$s\' -H \'Content-Type: application/json\'';
 
-    const DEFAULT_PARAMS = array(
+    // const DEFAULT_PARAMS = array(
+    private $DEFAULT_PARAMS = array(
         'platform' => 'generic',    // Either generic, facebook, slack, kik
         'v' => '0.7.4-rest',        // API Version
         'type' => null,             // Hit type (required)
@@ -37,7 +38,7 @@ class Dashbot extends AbstractTracker
             $emitter ? $emitter : new Emitter\Async(self::TRANSPORTER_CMD),
             $formatter ? $formatter : new LogFormatter\Json()
         );
-        $this->emitter->setParams(self::DEFAULT_PARAMS);
+        $this->emitter->setParams($this->DEFAULT_PARAMS);
 
         if (is_array($mixed) && isset($mixed['apiKey'])) {
             $this->emitter->addParams($mixed);
