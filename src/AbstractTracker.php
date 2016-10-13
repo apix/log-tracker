@@ -10,6 +10,7 @@ use Ramsey\Uuid\Uuid;
  */
 abstract class AbstractTracker extends Logger\AbstractLogger implements Logger\LoggerInterface
 {
+
     /**
      * Holds a LogEmitter instance.
      *
@@ -50,10 +51,9 @@ abstract class AbstractTracker extends Logger\AbstractLogger implements Logger\L
      */
     public function write(LogEntry $log)
     {
-        // $log->setFormatter( $this->log_formatter );
-
         try {
-            return $this->emitter->send((string) $log);
+            $payload = $this->deferred ? $log->message : $log;
+            return $this->emitter->send((string)$payload);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage(), $e->getCode(), $e);
         }
@@ -69,7 +69,7 @@ abstract class AbstractTracker extends Logger\AbstractLogger implements Logger\L
     public static function generateUuid()
     {
         return function_exists('uuid_create')
-                ? uuid_create(\UUID_TYPE_DEFAULT) // PECL extension is faster
+                ? uuid_create(\UUID_TYPE_DEFAULT) // PECL extension is faster.
                 : Uuid::uuid4()->toString();
     }
 

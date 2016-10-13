@@ -92,20 +92,35 @@ class GoogleAnalyticsTest extends tests\TestCase
             'url', $this->logger->getEmitter());
     }
 
+    /**
+     * @group TODO
+     */
     public function testDeferredLoggingWhileImplicitlyDestructing()
     {
-        $exec = $this->grabMock()->expects($this->once());
+        $max = 4; // number of logs
 
         $this->logger->setDeferred(true);
 
-        // TODO max 20 for google!
-        foreach (range(0, 21) as $i) {
-            $data = $this->logger->getEvent('cat', 'action', 'label', $i);
+        foreach (range(1, $max) as $i) {
+            $data = $this->logger->getEvent(
+                'cat #.' . $i, 'action', 'label', $i
+            );
             $this->logger->info('event #'.$i, $data);
         }
-        $this->assertCount(22, $this->logger->getDeferredLogs());
+        $this->assertCount($max, $this->logger->getDeferredLogs());
 
-        $this->logger->__destruct();
+        $exec = $this->grabMock()->expects($this->once());
+        $exec->willReturnCallback(
+            function ($cmd, &$output, &$return_var) use ($max) {
+                $this->assertSame( $max-1, substr_count(
+                    $cmd,
+                    $this->logger->getLogFormatter()->separator
+                ));
+                return true;
+            }
+        );
+
+        unset($this->logger); // call __destruct()
     }
 
     public function providerTrackerParams()

@@ -54,7 +54,7 @@ class GoogleAnalytics extends AbstractTracker
         }
         $this->uuid = $params['cid'];
 
-        $this->setemitter(
+        $this->setEmitter(
             $emitter ? $emitter : new Emitter\Async(),
             $formatter ? $formatter : new LogFormatter\QueryString()
         );
