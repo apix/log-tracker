@@ -98,9 +98,8 @@ class Dashbot extends AbstractTracker
     public function rewriteTemplateId(array $entries, array $params)
     {
         if (isset($entries['json']) && $params['platform'] == 'facebook') {
-            if ($tpl_id = // get from `entries` (local) then `params` (global).
-                 $entries['dashbotTemplateId'] ?: $params['dashbotTemplateId']
-                    ?: false
+            if ($tpl_id = // get from entries (local) then params (global).
+                $entries['dashbotTemplateId'] ?: $params['dashbotTemplateId'] ?: false
             ) {
                 $entries['json']['dashbotTemplateId'] = $tpl_id;
                 // remove from `entries` (local) to avoid duplicate.
@@ -112,7 +111,7 @@ class Dashbot extends AbstractTracker
     }
 
     /**
-     * Sets the event hit type.
+     * Returns the named tracking dataset.
      *
      * @param string $type
      * @param array  $entries
@@ -120,7 +119,7 @@ class Dashbot extends AbstractTracker
      *
      * @return array
      */
-    protected function get($type, array $entries, $local_tag = null)
+    public function get($type, array $entries, $local_tag = null)
     {
         if ($local_tag) {
             $entries['dashbotTemplateId'] = $local_tag;
@@ -132,6 +131,8 @@ class Dashbot extends AbstractTracker
 
         $this->emitter->setParam('type', $type);
         $this->emitter->setUrl(self::TRACKER_URL);
+
+        $this->data= [ $type, $entries ];
 
         return (array) $entries;
     }

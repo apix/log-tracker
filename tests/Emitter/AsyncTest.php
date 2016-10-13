@@ -71,4 +71,19 @@ class AsyncTest extends \PHPUnit_Framework_TestCase
         $this->emitter->send('foo');
         $this->expectOutputRegex('/\] ERROR \w.* - an error msg - Code #123$/');
     }
+
+    public function testSetErrorHandler()
+    {
+        $logger = new \Apix\Log\Logger\Nil;
+        $this->emitter->setErrorHandler( $logger );
+        $this->assertSame($logger, $this->emitter->getErrorHandler());
+    }
+
+    public function testSetterGetterParams()
+    {
+        $this->assertFalse($this->emitter->hasParam('foo'));
+        $this->emitter->setParam('foo', 'bar');
+        $this->assertTrue($this->emitter->hasParam('foo'));
+        $this->assertSame('bar', $this->emitter->getParam('foo'));
+    }
 }

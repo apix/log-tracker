@@ -3,6 +3,7 @@
 namespace Apix\Log\Emitter;
 
 use Apix\Log\Logger;
+use Apix\Log\Logger\LoggerInterface;
 
 abstract class AbstractEmitter implements EmitterInterface
 {
@@ -121,7 +122,7 @@ abstract class AbstractEmitter implements EmitterInterface
      */
     protected $error_handler = null;
 
-    public function setErrorHandler(Logger $logger)
+    public function setErrorHandler(LoggerInterface $logger)
     {
         $this->error_handler = $logger;
     }

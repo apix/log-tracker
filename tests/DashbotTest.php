@@ -147,4 +147,28 @@ class DashbotTest extends tests\TestCase
         $params = $this->_getParams();
         $this->assertSame($type, $params['type']);
     }
+
+    public function testSetGlobalTag()
+    {
+        $emitter = $this->logger->getEmitter();
+        $this->assertFalse($emitter->hasParam('dashbotTemplateId'));
+        $this->logger->setGlobalTag('foo');
+        $this->assertTrue($emitter->hasParam('dashbotTemplateId'));
+        $this->assertSame('foo', $emitter->getParam('dashbotTemplateId'));
+    }
+
+    public function testSetLocalTag()
+    {
+        $emitter = $this->logger->getEmitter();
+        $this->assertFalse($emitter->hasParam('dashbotTemplateId'));
+        $entries = $this->logger->get('foo', array(), 'local-tag');
+        $this->assertSame('local-tag', $entries['dashbotTemplateId']);
+    }
+
+
+    public function testRewriteTemplateId()
+    {
+        // TODO: review the rules.
+    }
+
 }

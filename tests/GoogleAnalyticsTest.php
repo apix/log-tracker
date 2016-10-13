@@ -25,14 +25,28 @@ class GoogleAnalyticsTest extends tests\TestCase
     {
         $_SERVER['HTTP_USER_AGENT'] = 'foo';
         $_SERVER['HTTP_REFERER'] = 'bar';
+        $_SERVER['REMOTE_ADDR'] = '1.2.3';
 
         $e = new LogEmitter\Async();
         $this->logger = new GoogleAnalytics($this->options, $e);
 
         $this->assertSame($_SERVER['HTTP_USER_AGENT'], $e->getParam('ua'));
         $this->assertSame($_SERVER['HTTP_REFERER'], $e->getParam('dr'));
+        $this->assertSame($_SERVER['REMOTE_ADDR'], $e->getParam('uip'));
 
-        unset($_SERVER['HTTP_USER_AGENT'], $_SERVER['HTTP_REFERER']);
+        unset(
+            $_SERVER['HTTP_USER_AGENT'],
+            $_SERVER['HTTP_REFERER'],
+            $_SERVER['REMOTE_ADDR']
+        );
+    }
+
+    public function testConstructorWillSelfGenerateUuid()
+    {
+        $emitter = new LogEmitter\Async();
+        $this->logger = new GoogleAnalytics(array('tid'=>'foo'), $emitter);
+        $this->assertSame($this->logger->getUuid(), $emitter->getParam('cid'));
+
     }
 
     /**
