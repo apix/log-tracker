@@ -1,8 +1,8 @@
-# Log-Tracker, the tracking companion to Apix-Log
+# Log-Tracker, the tracking companion to [Apix-Log](//github.com/apix/log)
 
 [![Latest Stable Version](https://poser.pugx.org/apix/log-tracker/v/stable.svg)](https://packagist.org/packages/apix/log-tracker)  [![Build Status](https://travis-ci.org/apix/log-tracker.png?branch=master)](https://travis-ci.org/apix/log-tracker)  [![Code Quality](https://scrutinizer-ci.com/g/apix/log-tracker/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![Code Coverage](https://scrutinizer-ci.com/g/apix/log-tracker/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/apix/log-tracker/?branch=master)  [![License](https://poser.pugx.org/apix/log-tracker/license.svg)](https://packagist.org/packages/apix/log-tracker)
 
-An extension for the [Apix-Log](https://github.com/frqnck/apix-log) PSR-3 logger which adds log tracking to:
+An extension for the [Apix-Log](//github.com/apix/log) PSR-3 logger which adds log tracking to:
  * [GoogleAnalytics](src/GoogleAnalytics.php),
  * [Dashbot](src/Dashbot.php).
 
@@ -11,7 +11,7 @@ Features:
  * Handles batched/deferred mode.
  * 100% Unit tested and compliant with PSR0, PSR1 and PSR2.
  * Continuously integrated against all modern PHP versions (**5.3 all the way through 7.0**, including **HHVM**).
- * Home repo is on [on github](https://github.com/frqnck/apix-log-tracker), and the Composer package is [on packagist](https://packagist.org/packages/frqnck/apix-log-tracker).
+ * Home repo is on [on github](//github.com/apix/log-tracker), and the Composer package is [on packagist](//packagist.org/packages/apix/log-tracker).
 
 Feel free to comment, send pull requests and patches...
 
@@ -75,4 +75,4 @@ Notes:
 
 ## Advanced usage.
 
-Please for now just follow [Apix Log Examples](https://github.com/frqnck/apix-log).
+Please for now just follow [Apix Log Examples](//github.com/apix/log).
