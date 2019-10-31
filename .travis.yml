@@ -1,24 +1,41 @@
 language: php
-
 sudo: false
-
 php:
-  - 5.3
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
   - hhvm
   - nightly
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.3
+      dist: precise
+    - php: 5.4
+      dist: trusty
+    - php: 5.5
+      dist: trusty
+  allow_failures:
+    - php: nightly
+    - php: hhvm
 
-before_script:
-  - travis_retry composer self-update && composer install --dev --no-interaction --prefer-source
+install:
+  - travis_retry composer self-update && composer install --no-interaction --prefer-source
   - mkdir -p build/logs
+  - travis_retry wget https://scrutinizer-ci.com/ocular.phar
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
-  - bash -c 'if [[ "$TRAVIS_PHP_VERSION" != "nightly" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi;'
-  - bash -c 'if [[ "$TRAVIS_PHP_VERSION" != "nightly" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml; fi;'
+  - if [[ $TRAVIS_PHP_VERSION =~ ^7 ]]; then
+      phpdbg -qrr vendor/phpunit/phpunit/phpunit --verbose --colors --coverage-clover=build/logs/clover.xml --coverage-text;
+    else
+      vendor/bin/phpunit --verbose --colors --coverage-clover build/logs/clover.xml --coverage-text;
+    fi
+
+after_script:
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml;
+  - php vendor/bin/coveralls -v
 
 notifications:
   irc: "irc.freenode.org#ouarz"
@@ -31,9 +48,6 @@ notifications:
 after_script:
 - php vendor/bin/coveralls -v
 
-matrix:
-  allow_failures:
-    - php: 5.3
-    - php: 5.4
-    - php: nightly
-  fast_finish: true
+cache:
+ directories:
+   - $HOME/.composer/cache
