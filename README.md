@@ -10,7 +10,7 @@ Features:
  * Send tracking data asynchnonously (non-blocking).
  * Handles batched/deferred mode.
  * 100% Unit tested and compliant with PSR0, PSR1 and PSR2.
- * Continuously integrated against all modern PHP versions (**5.3 all the way through 7.0**, including **HHVM**).
+ * Continuously integrated against all modern PHP versions (**5.3 all the way through 7.3**, ~~including HHVM~~).
  * Home repo is on [on github](//github.com/apix/log-tracker), and the Composer package is [on packagist](//packagist.org/packages/apix/log-tracker).
 
 Feel free to comment, send pull requests and patches...
